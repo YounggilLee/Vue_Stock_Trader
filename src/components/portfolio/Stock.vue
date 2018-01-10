@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-6 col-md-4">
-     <div class="panel panel-success">
+     <div class="panel panel-info">
          <div class="panel-heading">
              <h3 class="panel-title">
                  {{ stock.name }}
@@ -14,14 +14,15 @@
                         class="form-control"
                         placeholder="Quantity"
                         v-model="quantity"
+                        :class="{danger: insufficientQuantity}"
                         >
              </div>
              <div class="pull-right">
                  <button 
                         class="btn btn-success"
                         @click="sellStock"
-                        :disabled="quantity <= 0 || !Number.isInteger(quantity * 1)"
-                        >Sell
+                        :disabled="insufficientQuantity || quantity <= 0 || !Number.isInteger(quantity * 1)"
+                        >{{insufficientQuantity ? 'Not enough' : 'Sell'}}
                         </button>
                  
              </div>
@@ -30,6 +31,12 @@
   </div>
 
 </template>
+
+<style scoped>
+    .danger {
+        border: 1px solid red;
+    }
+</style>
 
 <script>
 import {mapActions} from 'vuex'
@@ -41,10 +48,15 @@ export default {
             quantity: 0
         }
     },
+    computed: {
+        insufficientQuantity() {
+            return this.quantity > this.stock.quantity;
+        }
+    },
     methods: {
-        ...mapActions([
-            'sellStock'
-        ]),
+        ...mapActions({
+            placeSellOrder : 'sellStock'
+        }),
         sellStock() {
             const order = {
                 stockId: this.stock.id,
@@ -52,7 +64,8 @@ export default {
                 quantity: this.quantity
 
             }
-           this.sellStock();
+           this.placeSellOrder(order);
+           this.quantity = 0;
         }
     }
 }
