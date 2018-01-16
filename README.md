@@ -1,6 +1,13 @@
-# vue-cli
+# Stock_Trader
 
-> A Vue.js project
+Stock_Trader (Vue, Vuex, Vue-router, Fireabase)
+
+This application is a stock trading game. You can buy some stock and sell them to get the money.
+Your seed momey is $ 10,000. Good Luck!!
+
+
+## Live Link : http://vuestocktraderdemo.s3-website.us-east-2.amazonaws.com/stocks
+
 
 ## Build Setup
 
