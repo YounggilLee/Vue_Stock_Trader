@@ -6,7 +6,7 @@ This application is a stock trading game. You can buy some stock and sell them t
 Your seed momey is $ 10,000. Good Luck!!
 
 
-## Live Link : https://younggillee.github.io/Vue_Stock_Trader/
+## Live Link :
 
 
 ## Build Setup
